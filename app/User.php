@@ -16,8 +16,6 @@ class User extends Model
     public function generateHash($passwordField){
         $hashed = Hash::make($passwordField);
         return $hashed;
-    }
-
-    
+    }    
 
 }

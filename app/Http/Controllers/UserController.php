@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Http\Requests\StoreUpdateUserRequest;
-
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 class UserController extends Controller
 {
     /**
@@ -15,7 +15,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+
+        return view('user.index', ['users' => $users]);
+
     }
 
     /**
@@ -34,7 +37,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdateUserRequest $request)
+    public function store(StoreUserRequest $request)
     {   
         $data = $request->all();
 
@@ -54,9 +57,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($email)
     {
-        //
+        $user = User::where('email', $email)->first();
+
+        return view('user.show', ['user' => $user]);
+
     }
 
     /**
@@ -65,9 +71,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($email)
     {
-        //
+        $user = User::where('email', $email)->first();
+
+        return view('user.edit', ['user' => $user]);
+        
     }
 
     /**
@@ -77,9 +86,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $email)
     {
-        //
+        
+        User::where('email', $email)->
+        update(['firstname' => $request->firstname, 'lastname' => $request->lastname]);
+
+        return redirect()->route('users.index');
+
     }
 
     /**
@@ -88,8 +102,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($email)
     {
-        //
+
+        User::where('email', $email)->delete();
+
+        return redirect()->route('users.index');
+
     }
 }
