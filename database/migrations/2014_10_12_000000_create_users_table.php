@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('lastname');
             $table->string('email')->unique();
             $table->string('cpf')->primary();
-            $table->enum('is_admin', ['0', '1']);
+            $table->enum('is_admin', ['0', '1'])->default('0');
             $table->string('password');
             $table->timestamps();
         });

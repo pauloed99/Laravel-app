@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Http\Requests\StoreUpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -23,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.create');
     }
 
     /**
@@ -32,9 +34,18 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(StoreUpdateUserRequest $request)
+    {   
+        $data = $request->all();
+
+        $user = new User();
+        $hash = $user->generateHash($request->password);
+
+        $data['password'] = $hash;
+
+        User::create($data);
+        return redirect()->route('users.create');
+ 
     }
 
     /**
