@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreUpdateProductRequest;
+use App\Product;
 
 class ProductController extends Controller
 {
@@ -13,7 +15,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+
+        $products = Product::all();
+
+        return view('product.index', ['products' => $products]);
+
     }
 
     /**
@@ -23,7 +29,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('product.create');
     }
 
     /**
@@ -32,9 +38,14 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUpdateProductRequest $request)
     {
-        //
+
+        $data = $request->all();
+        Product::create($data);
+
+        return redirect()->route('products.index');
+
     }
 
     /**
@@ -43,9 +54,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($productId)
     {
-        //
+        $product = Product::where('product_id', $productId)->first();
+
+        return view('product.show', ['product' => $product]);
     }
 
     /**
@@ -54,9 +67,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($productId)
     {
-        //
+        $product = Product::where('product_id', $productId)->first();
+
+        return view('product.edit', ['product' => $product]);   
     }
 
     /**
@@ -66,9 +81,16 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUpdateProductRequest $request, $productId)
     {
-        //
+
+        $data = $request->all();
+
+        Product::where('product_id', $productId)->
+        update(['name' => $data['name'], 'price' => $data['price'], 'brand' => $data['brand']]);
+
+        return redirect()->route('products.index');
+
     }
 
     /**
@@ -77,8 +99,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($productId)
     {
-        //
+        Product::where('product_id', $productId)->delete();
+
+        return redirect()->route('products.index');
     }
 }
