@@ -23,6 +23,8 @@
         </div>
         
     @endforeach
+
+    <a href="{{route('logout')}}"><button>Logout</button></a>
     
 
 @endsection

@@ -4,8 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+
+class User extends Authenticatable 
 {
 
     protected $fillable = [
@@ -19,3 +21,4 @@ class User extends Model
     }    
 
 }
+
