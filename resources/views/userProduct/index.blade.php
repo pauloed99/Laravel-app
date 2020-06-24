@@ -1,13 +1,13 @@
 @extends('layouts.template')
 
-@section('title', 'produtos cadastrados')
+@section('title', 'Seus produtos')
 
 @section('content')
     
-    <h1 class="container mt-4">Produtos cadastrados no sistema</h1>
+    <h1 class="container mt-4">Produtos que você pretende comprar !</h1>
     <hr />
 
-    @foreach ($products as $product)
+    @foreach ($userProducts as $userProduct)
 
         <div class="card container mt-4 border border border-success bg-light">
 
@@ -18,11 +18,12 @@
                 <p>Price : {{$product->price}}</p>
                 <p>Brand : {{$product->brand}}</p>
 
-                <a href="{{route('products.show', $product->product_id)}}">
-                    <button class="btn btn-success mt-4" type="submit" >
+                <form action="{{route('userProducts.store', $product->product_id)}}" 
+                method="POST">
+                    <button class="btn btn-success mt-4" type="submit">
                         Adicionar Produto para comprar !
                     </button>
-                </a>
+                </form>
                 
             </div>
 

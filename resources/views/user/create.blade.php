@@ -17,7 +17,7 @@
                 @csrf
                 <label for="firstname">Nome : </label>
                 <input type="text" class="form-control" name="firstname" id="firstname" 
-            placeholder="digite o seu primeiro nome" value="{{old('firstname')}}"/>
+                placeholder="digite o seu primeiro nome" value="{{old('firstname')}}"/>
         
                 <label for="lastname">Sobrenome : </label>
                 <input type="text" class="form-control" name="lastname" id="lastname"

@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use App\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Support\Facades\Auth;
+
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('create');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +22,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        
         $users = User::all();
 
         return view('user.index', ['users' => $users]);

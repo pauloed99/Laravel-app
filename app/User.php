@@ -10,6 +10,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable 
 {
 
+    protected $primaryKey = 'cpf';
+
     protected $fillable = [
         'firstname', 'lastname', 'email', 'cpf', 'password'
     ];

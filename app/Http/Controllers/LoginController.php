@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginUserRequest;
 
 class LoginController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only('logout');
+    }
     
     public function show(){
         return view('auth.login');
@@ -18,11 +22,12 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            dd(Auth::user());
-            return redirect()->route('users.index');
+            return redirect()->route('products.index');
         }
-        else
+        else{
             return redirect()->route('login.show');
+        }
+            
     }
 
     public function logout(){
