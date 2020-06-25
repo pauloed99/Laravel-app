@@ -7,7 +7,7 @@ Route::resource('users', 'UserController');
 
 Route::resource('products', 'ProductController');
 
-Route::resource('userProducts', 'UserProductController');
+Route::resource('productUsers', 'ProductUserController');
 
 Route::get('login', 'LoginController@show')->name('login.show');
 

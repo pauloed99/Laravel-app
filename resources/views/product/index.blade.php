@@ -20,7 +20,7 @@
 
                 <a href="{{route('products.show', $product->product_id)}}">
                     <button class="btn btn-success mt-4" type="submit" >
-                        Adicionar Produto para comprar !
+                        Ver mais !
                     </button>
                 </a>
                 

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Http\Request;
 use App\UserProduct;
+use Illuminate\Support\Facades\Auth;
 
-class UserProductController extends Controller
+class ProductUserController extends Controller
 {
     public function __construct()
     {
@@ -19,8 +21,7 @@ class UserProductController extends Controller
     public function index()
     {
 
-        $userProducts = UserProduct::all();
-        return view('userProduct.index', ['userProducts' => $userProducts]);
+       
         
     }   
 
@@ -33,7 +34,8 @@ class UserProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
     }
 
     /**
@@ -42,9 +44,10 @@ class UserProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($userProductId)
     {
-        //
+
+    
     }
 
 
@@ -54,7 +57,7 @@ class UserProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($userProductId)
     {
         //
     }

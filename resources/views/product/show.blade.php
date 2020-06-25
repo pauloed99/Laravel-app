@@ -26,6 +26,13 @@
                 <button type="submit" class="btn btn-danger mt-4">Deletar produto acima</button>
             </form>
 
+            <form action="{{route('userProducts.store')}}" method="POST">
+                @csrf
+                <input type="hidden" name="product_id" value="{{$product->product_id}}" />
+
+                <button type="submit" class="btn btn-success mt-4">Adicionar Produto ao carrinho</button>
+            </form>
+
         </div>
 
     </div>
