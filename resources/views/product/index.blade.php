@@ -19,7 +19,7 @@
                 <p>Brand : {{$product->brand}}</p>
 
                 <a href="{{route('products.show', $product->product_id)}}">
-                    <button class="btn btn-success mt-4" type="submit" >
+                    <button class="btn btn-success mt-4">
                         Ver mais !
                     </button>
                 </a>

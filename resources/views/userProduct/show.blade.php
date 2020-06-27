@@ -1,24 +1,25 @@
 @extends('layouts.template')
 
-@section('title', 'Seus produtos')
+@section('title', 'Seu Produto')
 
 @section('content')
     
-    <h1 class="container mt-4">Produtos que você pretende comprar !</h1>
+    <h1 class="container mt-4">Mais dados do produto do usuário!</h1>
     <hr />
-
-
 
     <div class="card container mt-4 border border border-success bg-light">
 
         <div class="card-body">
             
-            <p>Product_id : {{$product->product_id}}</p>
-            <p>Name : {{$product->name}}</p>
-            <p>Price : {{$product->price}}</p>
-            <p>Brand : {{$product->brand}}</p>
+            <p>Purchase Id : {{$userProduct->pivot->product_user_id}}</p>
+            <p>User CPF : {{$userProduct->pivot->cpf_user}}</p>
+            <p>Product id : {{$userProduct->product_id}}</p>
+            <p>Name : {{$userProduct->name}}</p>
+            <p>Price : {{$userProduct->price}}</p>
+            <p>Brand : {{$userProduct->brand}}</p>
+            <p>Purchase Date : {{$userProduct->pivot->created_at}}</p>
 
-            <form action="{{route('userProducts.destroy', $product->product_id)}}" 
+            <form action="{{route('userProducts.destroy', $userProduct->pivot->product_user_id)}}" 
             method="POST">
                 @csrf
                 @method('DELETE')
