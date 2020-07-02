@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+
+    
     public function __construct()
     {
         $this->middleware('auth')->except(['create', 'store']);
@@ -22,7 +24,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        
+        $this->authorize('viewAny', User::class);
+            
         $users = User::all();
 
         return view('user.index', ['users' => $users]);
@@ -68,6 +71,8 @@ class UserController extends Controller
     public function show($email)
     {
         $user = User::where('email', $email)->first();
+        
+        $this->authorize('view', $user);
 
         return view('user.show', ['user' => $user]);
 
@@ -83,6 +88,8 @@ class UserController extends Controller
     {
         $user = User::where('email', $email)->first();
 
+        $this->authorize('update', $user);
+
         return view('user.edit', ['user' => $user]);
         
     }
@@ -96,7 +103,10 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, $email)
     {
-        
+        $user = User::where('email', $email)->first();
+
+        $this->authorize('update', $user);
+
         User::where('email', $email)->
         update(['firstname' => $request->firstname, 'lastname' => $request->lastname]);
 
@@ -112,6 +122,9 @@ class UserController extends Controller
      */
     public function destroy($email)
     {
+        $user = User::where('email', $email)->first();
+
+        $this->authorize('delete', $user);
 
         User::where('email', $email)->delete();
 

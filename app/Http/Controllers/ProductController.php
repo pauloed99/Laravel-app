@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUpdateProductRequest;
 use App\Product;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
@@ -21,11 +22,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-
         $products = Product::all();
 
         return view('product.index', ['products' => $products]);
-
     }
 
     /**
@@ -34,7 +33,9 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
+        $this->authorize('manage-products');
+
         return view('product.create');
     }
 
@@ -46,6 +47,7 @@ class ProductController extends Controller
      */
     public function store(StoreUpdateProductRequest $request)
     {
+        $this->authorize('manage-products');
 
         $data = $request->all();
         Product::create($data);
@@ -75,6 +77,8 @@ class ProductController extends Controller
      */
     public function edit($productId)
     {
+        $this->authorize('manage-products');
+
         $product = Product::where('product_id', $productId)->first();
 
         return view('product.edit', ['product' => $product]);   
@@ -89,6 +93,7 @@ class ProductController extends Controller
      */
     public function update(StoreUpdateProductRequest $request, $productId)
     {
+        $this->authorize('manage-products');
 
         $data = $request->all();
 
@@ -96,7 +101,6 @@ class ProductController extends Controller
         update(['name' => $data['name'], 'price' => $data['price'], 'brand' => $data['brand']]);
 
         return redirect()->route('products.index');
-
     }
 
     /**
@@ -107,6 +111,8 @@ class ProductController extends Controller
      */
     public function destroy($productId)
     {
+        $this->authorize('manage-products');
+
         Product::where('product_id', $productId)->delete();
 
         return redirect()->route('products.index');
