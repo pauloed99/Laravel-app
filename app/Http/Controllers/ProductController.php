@@ -52,7 +52,7 @@ class ProductController extends Controller
         $data = $request->all();
         Product::create($data);
 
-        return redirect()->route('products.index');
+        return redirect()->back()->with('msg', 'Produto criado com sucesso !');
 
     }
 
@@ -100,7 +100,7 @@ class ProductController extends Controller
         Product::where('product_id', $productId)->
         update(['name' => $data['name'], 'price' => $data['price'], 'brand' => $data['brand']]);
 
-        return redirect()->route('products.index');
+        return redirect()->back()->with('msg', 'Produto atualizado com sucesso !');
     }
 
     /**

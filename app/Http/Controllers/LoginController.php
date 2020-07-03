@@ -14,6 +14,10 @@ class LoginController extends Controller
     }
     
     public function show(){
+        if(Auth::check()){
+            return redirect()->back();
+        }
+
         return view('auth.login');
     }
 
@@ -25,7 +29,7 @@ class LoginController extends Controller
             return redirect()->route('products.index');
         }
         else{
-            return redirect()->route('login.show');
+            return redirect()->back()->with('msg', 'Erro ao fazer login, dados incorretos !');
         }
             
     }

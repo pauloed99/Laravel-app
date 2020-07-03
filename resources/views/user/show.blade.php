@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.logged')
 
 @section('title', 'Dados do usuário')
 
@@ -18,7 +18,13 @@
 
             <a href="{{route('users.edit', $user->email)}}">
                 <button type="submit" class="btn btn-success mt-4">Editar usuário acima</button>
-            </a>    
+            </a>  
+
+            <br/>
+            
+            <a href="{{route('password.edit', $user->email)}}">
+                <button type="submit" class="btn btn-primary mt-4">Editar senha do usuário acima</button>
+            </a>
       
             <form action="{{route('users.destroy', $user->email)}}" method="POST">
                 @csrf

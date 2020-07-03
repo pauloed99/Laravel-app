@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.logged')
 
 @section('title', 'Dados do produto')
 
@@ -16,15 +16,17 @@
             <p>Price : {{$product->price}}</p>
             <p>Brand : {{$product->brand}}</p>
 
-            <a href="{{route('products.edit', $product->product_id)}}">
-                <button type="submit" class="btn btn-success mt-4">Editar produto acima</button>
-            </a>    
-      
-            <form action="{{route('products.destroy', $product->product_id)}}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger mt-4">Deletar produto acima</button>
-            </form>
+            @can('manage-products')
+                <a href="{{route('products.edit', $product->product_id)}}">
+                    <button type="submit" class="btn btn-success mt-4">Editar produto acima</button>
+                </a>    
+        
+                <form action="{{route('products.destroy', $product->product_id)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger mt-4">Deletar produto acima</button>
+                </form>
+            @endcan
 
             <form action="{{route('userProducts.store')}}" method="POST">
                 @csrf

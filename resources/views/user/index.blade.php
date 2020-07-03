@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.logged')
 
 @section('title', 'usuários cadastrados')
 
@@ -17,15 +17,16 @@
                 <p>Lastname : {{$user->lastname}}</p>
                 <p>CPF : {{$user->cpf}}</p>
                 <p>Email : {{$user->email}}</p>
+
+                <a href="{{route('users.show', $user->email)}}">
+                    <button class="btn btn-success mt-4">Ver mais !</button>
+                </a>
                 
             </div>
 
         </div>
         
     @endforeach
-
-    <a href="{{route('logout')}}"><button>Logout</button></a>
     
-
 @endsection
     

@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.notLogged')
 
 @section('title', 'Criar Usuário')
 
@@ -25,7 +25,7 @@
         
                 <label for="cpf">CPF : </label>
                 <input type="text" class="form-control" name="cpf" id="cpf" 
-                placeholder="digite o seu cpf" value="{{old('cpf')}}"/>
+                placeholder="digite o seu cpf" />
         
                 <label for="email">Email : </label>
                 <input type="email" class="form-control" name="email" id="email"
@@ -33,11 +33,11 @@
         
                 <label for="password">Senha : </label>
                 <input type="password" class="form-control" name="password" id="password" 
-                placeholder="digite a sua senha" value="{{old('password')}}"/>
+                placeholder="digite a sua senha" />
         
                 <label for="password2">Senha de confirmação : </label>
                 <input type="password" class="form-control" name="password2" id="password2" 
-                placeholder="digite a sua senha novamente" value="{{old('password2')}}"/>
+                placeholder="digite a sua senha novamente" />
 
                 <button class = "btn btn-success mt-4" 
                 type="submit">Cadastrar dados acima !</button>
@@ -48,9 +48,13 @@
 
     </div>
 
+    @if (session('msg'))
+        <p class="alert alert-success container mt-4">{{session('msg')}}</p>
+    @endif
+
     @if($errors->any())
         @foreach ($errors->all() as $error)
-            <p class="alert alert-danger">{{$error}}</p>
+            <p class="alert alert-danger container mt-4">{{$error}}</p>
         @endforeach
     @endif
     

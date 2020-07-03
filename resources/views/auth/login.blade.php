@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.notLogged')
 
 @section('title', 'Formulário de login')
 
@@ -36,9 +36,13 @@
 
     </div>
 
+    @if (session('msg'))
+        <p class="alert alert-danger container mt-4">{{session('msg')}}</p>
+    @endif
+
     @if($errors->any())
         @foreach ($errors->all() as $error)
-            <p class="alert alert-danger mt-4">{{$error}}</p>
+            <p class="alert alert-danger container mt-4">{{$error}}</p>
         @endforeach
     @endif
     

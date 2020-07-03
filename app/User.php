@@ -32,5 +32,11 @@ AuthorizableContract
         ->withTimestamps()->withPivot('product_user_id');
     }
 
+    public function compareHash($passwordField, $userPassword){
+        if (Hash::check($passwordField, $userPassword)) {
+            return true;
+        }
+    }
+
 }
 

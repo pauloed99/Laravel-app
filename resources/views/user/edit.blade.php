@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.logged')
 
 @section('title', 'Editar Usuário')
 
@@ -40,9 +40,13 @@
 
     </div>
 
+    @if (session('msg'))
+        <p class="alert alert-success container mt-4">{{session('msg')}}</p>
+    @endif
+
     @if($errors->any())
         @foreach ($errors->all() as $error)
-            <p class="alert alert-danger">{{$error}}</p>
+            <p class="alert alert-danger container mt-4">{{$error}}</p>
         @endforeach
     @endif
     

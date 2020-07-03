@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,6 +29,8 @@ class UserController extends Controller
             
         $users = User::all();
 
+        
+
         return view('user.index', ['users' => $users]);
 
     }
@@ -39,6 +42,10 @@ class UserController extends Controller
      */
     public function create()
     {
+        if(Auth::check()){
+            return redirect()->back();
+        }
+
         return view('user.create');
     }
 
@@ -58,7 +65,7 @@ class UserController extends Controller
         $data['password'] = $hash;
 
         User::create($data);
-        return redirect()->route('users.create');
+        return redirect()->back()->with('msg', 'Parabéns, seus dados foram registrados !');
  
     }
 
@@ -110,7 +117,7 @@ class UserController extends Controller
         User::where('email', $email)->
         update(['firstname' => $request->firstname, 'lastname' => $request->lastname]);
 
-        return redirect()->route('users.index');
+        return redirect()->back()->with('msg', 'Dados do usuário atualizados com sucesso');
 
     }
 
@@ -130,5 +137,34 @@ class UserController extends Controller
 
         return redirect()->route('users.index');
 
+    }
+
+    public function editPassword($email)
+    {
+        $user = User::where('email', $email)->first();
+
+        $this->authorize('update', $user);
+
+        return view('user.resetPassword', ['user' => $user]);
+    }
+
+    public function updatePassword(UpdatePasswordRequest $request, $email)
+    {
+        $user = User::where('email', $email)->first();
+
+        $this->authorize('update', $user);
+
+        $userModel = new User();
+
+        if($userModel->compareHash($request->password, $user->password)){
+
+            $hash = $userModel->generateHash($request->password2);
+
+            User::where('email', $email)->update(['password' => $hash]);
+
+            return redirect()->back()->with('msg', 'Senha redefinida com sucesso !');
+        }
+        
+        return redirect()->back()->withErrors(['Erro ao redefinir a senha']);
     }
 }
