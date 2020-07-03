@@ -20,6 +20,12 @@ class UserProductController extends Controller
      */
     public function index()
     {
+        if(Auth::user()->is_admin === '1'){
+            $users = User::with('products')->get();
+
+            return view('admin.userProduct.index', ['users' => $users]);
+        }
+
         $user = User::where('email', Auth::user()->email)->with('products')->first();
 
         return view('userProduct.index', ['userProducts' => $user->products]);

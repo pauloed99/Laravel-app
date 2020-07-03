@@ -25,11 +25,19 @@
           <a class="nav-link" href={{route('password.edit', Auth::user()->email)}}>Reset your password</a>
         </li>
 
-        <li class="nav-item active">
-          <a class="nav-link" href="{{route('userProducts.index')}}">Your Products</a>
-        </li>
+        @if (Auth::user()->is_admin === '0')
+
+          <li class="nav-item active">
+            <a class="nav-link" href="{{route('userProducts.index')}}">Your Products</a>
+          </li>
+
+        @endif
 
         @if (Auth::user()->is_admin === '1')
+
+          <li class="nav-item active">
+            <a class="nav-link" href="{{route('userProducts.index')}}">Products of users</a>
+          </li>
             
           <li class="nav-item active">
             <a class="nav-link" href={{route('users.index')}}>Users</a>
