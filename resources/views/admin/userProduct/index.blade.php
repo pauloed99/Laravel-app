@@ -19,12 +19,6 @@
                     <p>Purchase Id : {{$userProduct->pivot->product_user_id}}</p>
                     <p>Product Id : {{$userProduct->pivot->product_id}}</p>
                     <p>Purchase Date : {{$userProduct->pivot->created_at}}</p>
-
-                    <a href="{{route('userProducts.show', $userProduct->pivot->product_user_id)}}">
-                        <button class="btn btn-success mt-4">
-                            Ver mais !
-                        </button>
-                    </a>
                     
                 </div>
 

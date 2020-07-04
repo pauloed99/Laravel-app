@@ -28,7 +28,11 @@ class UserProductController extends Controller
 
         $user = User::where('email', Auth::user()->email)->with('products')->first();
 
-        return view('userProduct.index', ['userProducts' => $user->products]);
+        $userModel = new User();
+
+        $count = $userModel->countUserProducts($user->email);
+
+        return view('userProduct.index', ['userProducts' => $user->products, 'count' => $count]);
     }   
 
 

@@ -15,7 +15,7 @@
             <p>User CPF : {{$userProduct->pivot->cpf_user}}</p>
             <p>Product id : {{$userProduct->product_id}}</p>
             <p>Name : {{$userProduct->name}}</p>
-            <p>Price : {{$userProduct->price}}</p>
+            <p>Price : R$ {{$userProduct->price}}</p>
             <p>Brand : {{$userProduct->brand}}</p>
             <p>Purchase Date : {{$userProduct->pivot->created_at}}</p>
 

@@ -8,8 +8,7 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-
-
+use PhpParser\Node\Stmt\Foreach_;
 
 class User extends Model implements AuthenticatableContract,
 AuthorizableContract
@@ -36,6 +35,19 @@ AuthorizableContract
         if (Hash::check($passwordField, $userPassword)) {
             return true;
         }
+    }
+
+    public function countUserProducts($email){
+
+        $user = User::where('email', $email)->with('products')->first();
+
+        $count = 0;
+
+        foreach ($user->products as $userProduct) {
+            $count += $userProduct->price;
+        }
+
+        return $count;
     }
 
 }

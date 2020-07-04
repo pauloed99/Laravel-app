@@ -15,7 +15,7 @@
                 
                 <p>Product_id : {{$product->product_id}}</p>
                 <p>Name : {{$product->name}}</p>
-                <p>Price : {{$product->price}}</p>
+                <p>Price : R$ {{$product->price}}</p>
                 <p>Brand : {{$product->brand}}</p>
 
                 <a href="{{route('products.show', $product->product_id)}}">
