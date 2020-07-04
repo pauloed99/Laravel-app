@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginUserRequest;
 
+
 class LoginController extends Controller
 {
     public function __construct()
