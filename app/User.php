@@ -16,6 +16,7 @@ AuthorizableContract
     use Authenticatable, Authorizable;
 
     protected $primaryKey = 'cpf';
+    protected $keyType = 'string';
 
     protected $fillable = [
         'firstname', 'lastname', 'email', 'cpf', 'password'

@@ -4,7 +4,14 @@
 
 @section('content')
     
-    <h1 class="container mt-4">Produtos cadastrados no sistema</h1>
+    <h1 class="ml-5 mt-4">Produtos cadastrados no sistema</h1>
+
+    @can('manage-products')
+        <a href="{{route('products.create')}}">
+            <button class="btn btn-success mt-4 ml-5">Criar produto para o sistema</button>
+        </a>  
+    @endcan
+
     <hr />
 
     @foreach ($products as $product)
