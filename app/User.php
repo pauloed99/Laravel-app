@@ -19,7 +19,7 @@ AuthorizableContract
     protected $keyType = 'string';
 
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'cpf', 'password'
+        'firstname', 'lastname', 'email', 'cpf', 'password', 'is_admin'
     ];
     
     public function generateHash($passwordField){
